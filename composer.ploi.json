@@ -4,15 +4,6 @@
     "description": "Go with Laravel project landing page",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "packages/brunocfalcao/*",
-            "options": {
-                "symlink": true
-            }
-        }
-    ],
     "require": {
         "php": "^8.1",
         "brunocfalcao/laravel-helpers": "dev-master",
