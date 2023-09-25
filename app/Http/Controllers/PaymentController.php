@@ -88,7 +88,7 @@ class PaymentController extends Controller
 
             $responseData = json_decode($response->getBody(), true);
 
-            if (! isset($responseData['url'])) {
+            if (!isset($responseData['url'])) {
                 return response()->json(['error' => 'Unable to create checkout'], 500);
             }
 
@@ -117,7 +117,7 @@ class PaymentController extends Controller
             // (Note: You'll need to have your User model and migration set up)
             $user = User::where('email', $webhookData['data']['attributes']['user_email'])->first();
 
-            if (! $user) {
+            if (!$user) {
                 // User does not exist, create a new user and send welcome email
                 $newUser = new User();
                 $newUser->lemon_squeezy_customer_id = $customer->id;

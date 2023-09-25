@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\GitHubController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,15 +40,6 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         // Route for Dashboard of admin panel through Create Account
         Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
-        // Route for Listing purchase in admin panel
-        Route::get('/purchase', [ProductController::class, 'getPurchase'])->name('purchase');
-
-        // Route for Listing orders admin panel
-        Route::get('/orders', [ProductController::class, 'getOrders'])->name('orders');
-
-        Route::get('products', [ProductController::class, 'index'])->name('products.index');
-        Route::get('products-create', [ProductController::class, 'create'])->name('products.create');
-
         // Profile View in Dashboard panel
         Route::get('/profileview', [ProfileController::class, 'index'])->name('profileview');
 
@@ -57,5 +49,25 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         // Profile Update in Dashboard panel
         Route::post('profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
+        // Listing Products in Admin Panel
+        Route::get('products', [ProductController::class,'index'])->name('products.index');
+
+        // Fetch Products in Admin Panel
+        Route::get('products-create', [ProductController::class,'create'])->name('products.create');
+
+        Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+        Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+
+        // Route for Listing purchase in admin panel
+        Route::get('/purchase', [ProductController::class, 'getPurchase'])->name('purchase');
+
+        // Route for Listing orders admin panel
+        Route::get('/orders', [ProductController::class, 'getOrders'])->name('orders');
+
+
+        Route::put('/products/{id}/updateGithubLink', [ProductController::class, 'updateGithubLink'])->name('products.updateGithubLink');
+
+        Route::get('/orders/github/collaborators/add/{id}', [GitHubController::class, 'addCollaborator'])->name('add_collaborator');
+        Route::post('/github/collaborators/remove/{owner}/{repo}/{username}', [GitHubController::class, 'removeCollaborator']);
     });
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -53,6 +53,26 @@ class SocialController extends Controller
         return redirect()->intended('/home');
     }
 
+    private function saveImage($imageUrl)
+    {
+        // Get the file extension from the original URL
+        $fileExtension = pathinfo($imageUrl, PATHINFO_EXTENSION);
+        $validExtensions = ['jpg', 'jpeg', 'png'];
+
+        // Check if the extension is valid, otherwise use a default one (e.g., 'jpg')
+        if (!in_array($fileExtension, $validExtensions)) {
+            $fileExtension = 'jpg';
+        }
+
+        $fileName = time() . '_' . Str::random(10) . '.' . $fileExtension;
+        $destinationPath = public_path('profile_images');
+
+        // Download the image and save it to the destination path
+        file_put_contents($destinationPath . '/' . $fileName, file_get_contents($imageUrl));
+
+        return $fileName;
+    }
+
     public function redirectToApple()
     {
         return Socialite::driver('apple')->redirect();
@@ -93,25 +113,5 @@ class SocialController extends Controller
         }
 
         return redirect()->intended('/home');
-    }
-
-    private function saveImage($imageUrl)
-    {
-        // Get the file extension from the original URL
-        $fileExtension = pathinfo($imageUrl, PATHINFO_EXTENSION);
-        $validExtensions = ['jpg', 'jpeg', 'png'];
-
-        // Check if the extension is valid, otherwise use a default one (e.g., 'jpg')
-        if (! in_array($fileExtension, $validExtensions)) {
-            $fileExtension = 'jpg';
-        }
-
-        $fileName = time().'_'.Str::random(10).'.'.$fileExtension;
-        $destinationPath = public_path('profile_images');
-
-        // Download the image and save it to the destination path
-        file_put_contents($destinationPath.'/'.$fileName, file_get_contents($imageUrl));
-
-        return $fileName;
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('profileshow')
+@section('container')
     @if (session('status'))
         <div class="alert alert-success" role="alert">
             {{ session('status') }}
@@ -72,6 +72,22 @@
                                         </p>
                                     @else
                                         <p class="text-muted mb-0">Mobile number not available</p>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <hr>
+                            {{-- Social Login User Mobile Number --}}
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">GitHub User-Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    @if (Auth::user()->githubusername)
+                                        <p class="text-muted mb-0">{{ Auth::user()->githubusername }}
+                                        </p>
+                                    @else
+                                        <p class="text-muted mb-0">GitHub User-Name not added !!</p>
                                     @endif
                                 </div>
                             </div>

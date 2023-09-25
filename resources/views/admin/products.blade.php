@@ -4,11 +4,6 @@
     <!-- Begin Page Content -->
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Product Listing</h1>
-
-
-    {{-- <button type="button" class="btn btn-into" onclick="window.location='{{ route('products.create') }}'">
-        Get Product
-    </button> --}}
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
@@ -26,6 +21,7 @@
                             <th>Image</th>
                             <th>Name</th>
                             <th>Price</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +33,9 @@
                                 </td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->price_formatted }}</td>
+                                <td>
+                                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-info">Edit</a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

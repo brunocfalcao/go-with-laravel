@@ -2,15 +2,17 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\ForgetPasswordEmail;
-use App\Mail\ThankYouEmail;
-use App\Models\Order;
-use App\Models\User;
-use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Illuminate\Mail\Mailable;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
+use App\Models\Order;
+use App\Models\User;
+use App\Mail\ThankYouEmail;
+use App\Mail\ForgetPasswordEmail;
+use GuzzleHttp\Client;
 
 class ProcessOrders extends Command
 {
@@ -36,10 +38,11 @@ class ProcessOrders extends Command
         $client = new Client();
         $response = $client->get('https://api.lemonsqueezy.com/v1/orders',
             [
-                'headers' => [
+                'headers' =>
+                [
                     'Accept' => 'application/vnd.api+json',
                     'Content-Type' => 'application/vnd.api+json',
-                    'Authorization' => 'Bearer '.env('LEMON_SQUEEZY_API_KEY'),
+                    'Authorization' => 'Bearer ' . env('LEMON_SQUEEZY_API_KEY'),
                 ],
             ]);
 
@@ -50,7 +53,7 @@ class ProcessOrders extends Command
         $filteredOrders = array_filter($orders['data'], function ($orderData) use ($today) {
             return strpos($orderData['attributes']['created_at'], $today) !== false;
         });
-        // \Log::info($filteredOrders);
+
 
         foreach ($filteredOrders as $orderData) {
             $order = Order::updateOrCreate([
@@ -85,38 +88,32 @@ class ProcessOrders extends Command
                 'product_name' => $orderData['attributes']['first_order_item']['product_name'],
                 'variant_name' => $orderData['attributes']['first_order_item']['variant_name'],
                 'price' => $orderData['attributes']['first_order_item']['price'],
-                'receipt' => $orderData['attributes']['urls']['receipt'],
+                'receipt' => $orderData['attributes']['urls']['receipt']
             ],
-                $orderData);
+            $orderData);
 
             // Check if the order was just created (not updated)
-            \Log::info($order->wasRecentlyCreated);
             if ($order->wasRecentlyCreated) {
                 // Get the email ID from the API response
                 $email = $orderData['attributes']['user_email'];
                 $ordernumber = $orderData['attributes']['order_number'];
                 $ordertotal = $orderData['attributes']['total_formatted'];
-                \Log::info('Email: '.$email);
 
                 // Check if a user with this email already exists
                 $user = User::where('email', $email)->first();
-                \Log::info('User found: '.($user ? 'Yes' : 'No'));
 
-                if (! $user) {
+                if (!$user) {
                     // User does not exist, create a new user
                     $user = User::create([
                         'email' => $email,
                         'password' => Hash::make(Str::password(16)), // Generate a random password
                     ]);
-                    \Log::info('New user created: '.$email);
 
                     // Send a welcome email with a reset password link
                     Mail::to($email)->send(new ForgetPasswordEmail($user));
                 }
 
                 $userdata = ['user' => $user, 'order' => $order];
-                // \Log::info($userdata);
-                \Log::info('Thank You email sent to: '.$email);
                 // Send a thank you email
                 Mail::to($email)->send(new ThankYouEmail($user));
             }

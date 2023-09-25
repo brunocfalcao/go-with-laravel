@@ -1,66 +1,41 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Bruno
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This repository contains the code for the Bruno Laravel App
 
-## About Laravel
+## Local Development Setup
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> This documentation assumes you are running OSX or Linux based OS.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> Please ensure your local port 80 is not used by local servers.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+> This documentation assumes you are using a terminal to setup the project
 
-## Learning Laravel
+1. Clone the repository to your local machine and cd into the directory with `cd Bruno`
+2. Run `composer install` to install the PHP packages for the project
+3. Create the `.env` file by copying `cp .env.example .env`
+4. Run `php artisan key:generate` to generate command helps in the process of encryption so that there is no breach of privacy and private data.
+5. Run `npm install` to install and node modules. You can also run this on your local machine using `npm install`.
+6. Run `npm run dev` to process the frontend assets. You can also run this on your local machine using `npm run dev`.
+7. Run `php artisan migrate` to setup the database table and records.
+8. Run `php artisan db:seed --class=RolesAndPermissionsSeeder` to setup the roles in tables.
+9. Run `php artisan db:seed --class=AdminSeeder` to setup the admin record in user table.
+10. Go to `http://localhost:8000` for the local version of the app.
+11. Run `php artisan schedule:run` this command will run to automate the cronjob in application.
+12. Run `php artisan process:orders` this command will have to run after successfull payment through lemonsqueezy to fetch the records in a table of that order and also sending mail to the new user of ThankYou & Reset Password.
+13. Run `php artisan update:products` this command will fetch the products from lemonsqueezy store so you can aceess to download the files from products and can able to download in order section through button.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+> If you want to use a separate host such as `http://local.bruno.com`, use it in the .env and add `0.0.0.0 local.bruno.com` to your local hosts file.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Server Requirements
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+> PHP 8.2.4
+> node 16.14.2  
+> npm 8.5.0
 
-## Laravel Sponsors
+## Deployment
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Staging
 
-### Premium Partners
+### Production
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Daily Usage

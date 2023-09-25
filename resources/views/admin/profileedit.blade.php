@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('profileedit')
+@section('container')
     <section style="background-color: #eee;">
         <div class="container py-5">
             <div class="row">
@@ -58,6 +58,12 @@
                                 <div class="mb-3">
                                     <label for="profile_image" class="form-label">Profile Image</label>
                                     <input type="file" class="form-control" id="profile_image" name="profile_image">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="githubusername" class="form-label">Github Profile User-Name</label>
+                                    <input type="text" class="form-control" id="githubusername" name="githubusername"
+                                        value="{{ $user->githubusername }}">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Save Changes</button>

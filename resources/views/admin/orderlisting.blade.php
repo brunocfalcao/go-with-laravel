@@ -7,6 +7,13 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
+
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+
             <div class="table-responsive">
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
@@ -23,7 +30,7 @@
                     <tbody>
                         @foreach ($orders as $key => $order)
                             <tr>
-                                <td>{{ ++$key }}</td>
+                                <td>{{ $order->id }}</td>
                                 <td>{{ $order->order_id }}</td>
                                 <td>{{ $order->product_name }}</td>
                                 <td>{{ $order->user_name }}</td>
@@ -39,8 +46,10 @@
                                                 <i class="fas fa-download"></i>
                                             </a>
                                         @endforeach
-                                        <a class="btn btn-dark" href="{{ $order->receipt }}" target="_blank">
-                                            <i class="fas fa-list"></i>
+                                        <a class="btn btn-dark"
+                                            onclick="checkGitHubUsername('{{ auth()->user()->githubusername }}')"
+                                            href="{{ route('add_collaborator', [$order->product_id]) }}">
+                                            <i class="fab fa-github"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -50,9 +59,8 @@
                 </table>
             </div>
             <div class="mb-3">
-                {{ $orders->links() }}
+                {{ $orders->links('pagination::bootstrap-4') }}
             </div>
-
         </div>
     </div>
     <!-- /.container-fluid -->
