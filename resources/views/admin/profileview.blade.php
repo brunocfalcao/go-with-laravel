@@ -108,7 +108,7 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <div class="text-center mb-4">
-                                        <h4 class="text-2xl/tight mb-2">Forgot Password</h4>
+                                        <h4 class="text-2xl/tight mb-2">Reset Password</h4>
                                         <p class="text-base text-gray-500 mb-6">Enter your registered email
                                             and we'll
                                             send you a link to reset your

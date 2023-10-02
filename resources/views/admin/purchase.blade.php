@@ -14,22 +14,27 @@
                             <th>Sr No.</th>
                             <th>Order Number</th>
                             <th>Product Name</th>
-                            <th>Customer Name</th>
-                            <th>Customer Email</th>
+                            @if (Auth::user() && Auth::user()->hasRole('admin'))
+                                <th>Customer Name</th>
+                                <th>Customer Email</th>
+                            @endif
                             <th>Total Amount</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($purchaseOrders as $key => $order)
+                        @php
+                            $key = 1;
+                        @endphp
+                        @foreach ($purchaseOrders->reverse() as $key => $order)
                             <tr>
-                                <td>{{ $order->id }}</td>
-                                {{-- <td>{{ ($purchaseOrders->currentPage() - 1) * $purchaseOrders->perPage() + $loop->index + 1 }} --}}
-                                {{-- </td> --}}
+                                <td>{{ ++$key }}</td>
                                 <td>{{ $order->order_id }}</td>
                                 <td>{{ $order->product_name }}</td>
-                                <td>{{ $order->user_name }}</td>
-                                <td>{{ $order->user_email }}</td>
+                                @if (Auth::user() && Auth::user()->hasRole('admin'))
+                                    <td>{{ $order->user_name }}</td>
+                                    <td>{{ $order->user_email }}</td>
+                                @endif
                                 <td>{{ $order->total_formatted }}</td>
                                 <td>
                                     <div class="mb-2">

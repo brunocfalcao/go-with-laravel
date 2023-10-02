@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use App\Models\Order;
 use App\Models\User;
 use App\Mail\ThankYouEmail;
@@ -110,7 +111,10 @@ class ProcessOrders extends Command
                     ]);
 
                     // Send a welcome email with a reset password link
-                    Mail::to($email)->send(new ForgetPasswordEmail($user));
+                    // Mail::to($email)->send(new ForgetPasswordEmail($user));
+
+                    // Assuming $email contains the user's email address
+                    Password::sendResetLink(['email' => $email]);
                 }
 
                 $userdata = ['user' => $user, 'order' => $order];
@@ -118,7 +122,6 @@ class ProcessOrders extends Command
                 Mail::to($email)->send(new ThankYouEmail($user));
             }
         }
-
         $this->info('Orders processed successfully.');
     }
 }

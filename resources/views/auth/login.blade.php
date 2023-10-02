@@ -30,7 +30,7 @@
                         <input type="email" id="email"
                             class="form-control form-control-lg @error('email') is-invalid @enderror" name="email"
                             value="{{ old('email') }}" required autocomplete="email" autofocus
-                            placeholder="Enter a valid email address" />
+                            placeholder="Enter your Email Address" />
                         <label class="form-label" for="email">{{ __('Email Address') }}</label>
 
                         @error('email')
@@ -44,7 +44,7 @@
                     <div class="form-outline mb-3">
                         <input type="password" id="password"
                             class="form-control form-control-lg @error('password') is-invalid @enderror"
-                            placeholder="Enter password" name="password" required autocomplete="current-password" />
+                            placeholder="Enter your Password" name="password" required autocomplete="current-password" />
 
                         <label class="form-label" for="password">Password</label>
 

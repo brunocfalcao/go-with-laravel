@@ -46,7 +46,10 @@ class GitHubController extends Controller
 
             // Get the authenticated admin role user GitHub Username.
             $auth_user = Auth::user();
-            $github_user_name_admin = User::where('role', 'admin')->value('githubusername');
+            // $github_user_name_admin = User::where('role', 'admin')->value('githubusername');
+            $github_user_name_admin = User::whereHas('roles', function($query) {
+                $query->where('name', 'admin');
+            })->value('githubusername');
 
             // If the Admin has not added the Github Username in their profile then show the message.
             if (!$github_user_name_admin) {

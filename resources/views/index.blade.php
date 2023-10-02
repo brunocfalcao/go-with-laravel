@@ -81,12 +81,10 @@
                     </div> --}}
                 @else
                     <div class="lg:flex gap-4 hidden grow navbar-nav">
-                        <a href="{{ route('dashboard') }}"
-                            class="nav-link btn-none py-2 px-3 text-base font-medium text-white">{{ Auth::user()->name }}</a>
+                        <a href="{{ route('dashboard') }}" class="nav-btn py-1 px-4">{{ __('Dashboard') }}</a>
                     </div>
-                    <div class="lg:flex gap-4 hidden grow navbar-nav text-grey-700">
-                        <a class="nav-link btn-none py-2 px-3 text-base font-extrabold text-white"
-                            href="{{ route('logout') }}"
+                    <div class="lg:flex gap-4 hidden grow navbar-nav">
+                        <a class="nav-link nav-btn py-2 px-3" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf

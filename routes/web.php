@@ -64,10 +64,11 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         // Route for Listing orders admin panel
         Route::get('/orders', [ProductController::class, 'getOrders'])->name('orders');
 
-
+        // Route for Add Github Repo Name by admin in Products
         Route::put('/products/{id}/updateGithubLink', [ProductController::class, 'updateGithubLink'])->name('products.updateGithubLink');
 
+        // Route for Add Collaborator in Github private Repo from Order
         Route::get('/orders/github/collaborators/add/{id}', [GitHubController::class, 'addCollaborator'])->name('add_collaborator');
-        Route::post('/github/collaborators/remove/{owner}/{repo}/{username}', [GitHubController::class, 'removeCollaborator']);
+        // Route::post('/github/collaborators/remove/{owner}/{repo}/{username}', [GitHubController::class, 'removeCollaborator']);
     });
 });
