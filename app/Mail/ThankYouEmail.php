@@ -39,8 +39,6 @@ class ThankYouEmail extends Mailable
     public function build()
     {
         $userData = $this->userData;
-        \Log::info('Thank you mail');
-
         return $this->subject('Thank You for Your Order')
                     ->view('emails.thank_you', compact('userData'));
     }

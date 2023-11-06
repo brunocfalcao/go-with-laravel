@@ -42,7 +42,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         // Check if the user has the "user" role; if not, assign it
-        if (! $user->hasRole('user')) {
+        if (!$user->hasRole('user')) {
             $user->assignRole('user');
         }
 

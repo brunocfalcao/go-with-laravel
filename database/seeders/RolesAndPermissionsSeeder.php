@@ -17,7 +17,7 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Check if the 'admin' role already exists for the 'web' guard
-        if (! Role::where('name', 'admin')->where('guard_name', 'web')->exists()) {
+        if (!Role::where('name', 'admin')->where('guard_name', 'web')->exists()) {
             // The 'admin' role does not exist, so create it
             $adminRole = Role::create(['name' => 'admin', 'guard_name' => 'web']);
 
@@ -29,7 +29,7 @@ class RolesAndPermissionsSeeder extends Seeder
         }
 
         // Check if the 'user' role already exists for the 'web' guard
-        if (! Role::where('name', 'user')->where('guard_name', 'web')->exists()) {
+        if (!Role::where('name', 'user')->where('guard_name', 'web')->exists()) {
             // The 'user' role does not exist, so create it
             $userRole = Role::create(['name' => 'user', 'guard_name' => 'web']);
 

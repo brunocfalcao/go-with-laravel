@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('profileshow')
+@section('container')
     @if (session('status'))
         <div class="alert alert-success" role="alert">
             {{ session('status') }}
@@ -77,6 +77,22 @@
                             </div>
 
                             <hr>
+                            {{-- Social Login User Mobile Number --}}
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">GitHub User-Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    @if (Auth::user()->githubusername)
+                                        <p class="text-muted mb-0">{{ Auth::user()->githubusername }}
+                                        </p>
+                                    @else
+                                        <p class="text-muted mb-0">GitHub User-Name not added !!</p>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <hr>
                             <div class="row">
                                 <div class="text-center">
                                     <a href="{{ route('admin.profileedit') }}" class="btn btn-primary">Edit Profile</a>
@@ -92,7 +108,7 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <div class="text-center mb-4">
-                                        <h4 class="text-2xl/tight mb-2">Forgot Password</h4>
+                                        <h4 class="text-2xl/tight mb-2">Reset Password</h4>
                                         <p class="text-base text-gray-500 mb-6">Enter your registered email
                                             and we'll
                                             send you a link to reset your

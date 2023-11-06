@@ -22,7 +22,7 @@
             auth()->user()->roles->first()->name == 'admin')
         <li class="nav-item">
             <a class="nav-link active" href="{{ route('products.index') }}">
-                <i class="fas fa-fw fa-list"></i>
+                <i class="fas fa-fw fa-box-open"></i>
                 <span>Products</span></a>
         </li>
     @endif
@@ -30,14 +30,14 @@
     <!-- Nav Item - Tables -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('purchase') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-shopping-cart"></i>
             <span>Purchase</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('orders') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-file-invoice"></i>
             <span>Order</span></a>
     </li>
 

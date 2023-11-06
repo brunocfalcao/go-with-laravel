@@ -1,34 +1,27 @@
 {
-    "name": "brunocfalcao/go-with-laravel",
+    "name": "laravel/laravel",
     "type": "project",
-    "description": "Go with Laravel project landing page",
+    "description": "The skeleton application for the Laravel framework.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "packages/brunocfalcao/*",
-            "options": {
-                "symlink": true
-            }
-        }
-    ],
     "require": {
         "php": "^8.1",
-        "brunocfalcao/laravel-helpers": "dev-master",
         "guzzlehttp/guzzle": "^7.8",
+        "knplabs/github-api": "^1.7",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.8",
+        "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "laravelcollective/html": "^6.4",
         "lemonsqueezy/laravel": "^1.1",
-        "spatie/laravel-permission": "^5.11"
+        "spatie/laravel-permission": "^5.11",
+        "symfony/event-dispatcher": "^6.3"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.14",
-        "jubeki/laravel-code-style": "^2.0",
         "fakerphp/faker": "^1.9.1",
+        "laravel/pint": "^1.0",
+        "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.1",
@@ -47,8 +40,6 @@
         }
     },
     "scripts": {
-        "check-style": "php-cs-fixer fix --dry-run --diff",
-        "fix-style": "php-cs-fixer fix",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

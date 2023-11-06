@@ -39,15 +39,6 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    @yield('dashboard')
-
-                    @yield('purchase')
-
-                    @yield('orderlisting')
-
-                    @yield('profileshow')
-
-                    @yield('profileedit')
 
                     @yield('container')
                 </div>

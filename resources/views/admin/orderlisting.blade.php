@@ -7,6 +7,13 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
+
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+
             <div class="table-responsive">
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
@@ -14,20 +21,27 @@
                             <th>Sr No.</th>
                             <th>Order Number</th>
                             <th>Product Name</th>
-                            <th>Customer Name</th>
-                            <th>Customer Email</th>
+                            @if (Auth::user() && Auth::user()->hasRole('admin'))
+                                <th>Customer Name</th>
+                                <th>Customer Email</th>
+                            @endif
                             <th>Total Amount</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orders as $key => $order)
+                        @php
+                            $key = 1;
+                        @endphp
+                        @foreach ($orders->reverse() as $key => $order)
                             <tr>
                                 <td>{{ ++$key }}</td>
                                 <td>{{ $order->order_id }}</td>
                                 <td>{{ $order->product_name }}</td>
-                                <td>{{ $order->user_name }}</td>
-                                <td>{{ $order->user_email }}</td>
+                                @if (Auth::user() && Auth::user()->hasRole('admin'))
+                                    <td>{{ $order->user_name }}</td>
+                                    <td>{{ $order->user_email }}</td>
+                                @endif
                                 <td>{{ $order->total_formatted }}</td>
                                 <td>
                                     <div class="mb-2">
@@ -39,8 +53,10 @@
                                                 <i class="fas fa-download"></i>
                                             </a>
                                         @endforeach
-                                        <a class="btn btn-dark" href="{{ $order->receipt }}" target="_blank">
-                                            <i class="fas fa-list"></i>
+                                        <a class="btn btn-dark"
+                                            onclick="checkGitHubUsername('{{ auth()->user()->githubusername }}')"
+                                            href="{{ route('add_collaborator', [$order->product_id]) }}">
+                                            <i class="fab fa-github"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -52,7 +68,6 @@
             <div class="mb-3">
                 {{ $orders->links() }}
             </div>
-
         </div>
     </div>
     <!-- /.container-fluid -->

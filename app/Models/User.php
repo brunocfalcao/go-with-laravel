@@ -30,6 +30,7 @@ class User extends Authenticatable
         'apple_token',
         'profile_image',
         'role',
+        'githubusername',
     ];
 
     /**
